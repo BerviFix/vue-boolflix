@@ -21,7 +21,7 @@
                 <img src="https://is.gd/EE12Fe" alt="logo" width="100px">
 
                 <div class="searchBox">
-                    <input class="searchInput" type="text" name="searchMovie" placeholder="Search" v-model="titleSearched">
+                    <input class="searchInput" type="text" name="searchMovie" placeholder="Search" v-model="titleSearched" v-on:keyup.13="searchMovie">
                     <button class="searchButton" href="#" @click="searchMovie">
                         <i class="material-icons">
                             search
@@ -32,9 +32,34 @@
         </header>
 
         <main>
+            <div class="homepage_movies"  v-if="titleSearched == '' || movies.lenght == 0 " >
+                <h1>Film Popolari</h1>
+                <div class="top_movies">
+                    <div v-for="movie in popularMovies.slice(0, 7)" class="movie_card">
+                        <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie.poster_path" alt="movie.poster" width="100%" height="100%">
+                    </div>
+                </div>
+                
+                <h1>Film più votati</h1>
+                <div class="votated_movies">
+                    <div v-for="movie in votatedMovies.slice(0, 7)" class="movie_card">
+                        <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie.poster_path" alt="movie.poster" width="100%"
+                        height="100%">
+                    </div>
+                </div>
+                
+                <h1>Film in arrivo</h1>
+                <div class="coming_movies">
+                    <div v-for="movie in comingMovies.slice(0, 7)" class="movie_card">
+                        <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie.poster_path" alt="movie.poster" width="100%"
+                        height="100%">
+                    </div>
+                </div>
+            </div>
+
             <div class="movies_library" v-if="movies.lenght !=0">
                 <div v-for="movie in movies"  class="movie_card">
-                    <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie.poster_path" alt="movie.backdrop" width="100%" height="100%">
+                    <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie.poster_path" alt="movie.poster" width="100%" height="100%">
                 
                     <div class="overlay_info">
                         <p>

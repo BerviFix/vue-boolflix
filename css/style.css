@@ -70,6 +70,19 @@ header {
 
 }
 
+.homepage_movies h1 {
+    width: 90%;
+    margin: auto;
+    padding-top: 2%;
+}
+
+.top_movies, .votated_movies, .coming_movies {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 400px;
+}
+
 .movies_library {
     display: flex;
     justify-content: center;
