@@ -21,8 +21,8 @@
                 <img src="https://is.gd/EE12Fe" alt="logo" width="100px">
 
                 <div class="searchBox">
-                    <input class="searchInput" type="text" name="" placeholder="Search">
-                    <button class="searchButton" href="#">
+                    <input class="searchInput" type="text" name="searchMovie" placeholder="Search" v-model="titleSearched">
+                    <button class="searchButton" href="#" @click="searchMovie">
                         <i class="material-icons">
                             search
                         </i>
@@ -32,44 +32,16 @@
         </header>
 
         <main>
-            <div class="movies_library">
-                <div class="movie_card">
-                    <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/AkmUoSHkxW9txpzZ52gCcWweEkE.jpg" alt="movie.backdrop" width="100%" height="100%">
+            <div class="movies_library" v-if="movies.lenght !=0">
+                <div v-for="movie in movies"  class="movie_card">
+                    <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie.poster_path" alt="movie.backdrop" width="100%" height="100%">
                 
-                <div class="overlay_info">
-                    <p>
-                        <strong>Titolo:</strong> Ritorno al futuro
-                    </p>
-                    <p>
-                        <strong>Titolo originale:</strong> Back to the future
-                    </p>
-                    <p>
-                        <strong>Voto:</strong>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </p>
-                    <p>
-                        <strong>Overview:</strong>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex laborum vero perferendis maxime rem vitae in
-                        impedit, provident reprehenderit sapiente!
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quis ipsa alias itaque cum consequuntur doloribus similique harum adipisci in! Nam quas, sit illum doloremque laborum officiis fugiat id voluptas.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum magnam voluptates et eveniet quidem amet. Voluptatum totam doloremque ipsa repellendus? Corrupti aspernatur vitae aliquam amet perferendis iste quod ratione id!
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem ipsum hic placeat repellat velit? Illum dolore minus a laboriosam, architecto corporis incidunt tempora harum ex similique. Omnis voluptatibus voluptate maiores.
-                    </p>
-                </div>
-                
-                </div>
-                <div class="movie_card">
-                    <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/AkmUoSHkxW9txpzZ52gCcWweEkE.jpg" alt="movie.backdrop"
-                    width="100%" height="100%">
-                    
                     <div class="overlay_info">
                         <p>
-                            <strong>Titolo:</strong> Ritorno al futuro
+                            <strong>Titolo:</strong> {{movie.title}}
                         </p>
                         <p>
-                            <strong>Titolo originale:</strong> Back to the future
+                            <strong>Titolo originale:</strong> {{movie.original_title}}
                         </p>
                         <p>
                             <strong>Voto:</strong>
@@ -79,50 +51,8 @@
                         </p>
                         <p>
                             <strong>Overview:</strong>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex laborum vero perferendis maxime rem vitae in
-                            impedit, provident reprehenderit sapiente!
+                            {{movie.overview}}
                         </p>
-                    </div>
-                </div>
-
-                <div class="movie_card">
-                    <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/AkmUoSHkxW9txpzZ52gCcWweEkE.jpg" alt="movie.backdrop"
-                    width="100%" height="100%">
-                    
-                    <div class="overlay_info">
-                        <p>
-                            <strong>Titolo:</strong> Ritorno al futuro
-                        </p>
-                        <p>
-                            <strong>Titolo originale:</strong> Back to the future
-                        </p>
-                        <p>
-                            <strong>Voto:</strong>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </p>
-                        <p>
-                            <strong>Overview:</strong>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex laborum vero perferendis maxime rem vitae in impedit, provident reprehenderit sapiente!
-                        </p>
-                    </div>
-                </div>
-
-                <div class="movie_card">
-                    <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/AkmUoSHkxW9txpzZ52gCcWweEkE.jpg" alt="movie.backdrop"
-                    width="100%" height="100%">
-                    
-                    <div class="overlay_info">
-                        
-                    </div>
-                </div>
-                <div class="movie_card">
-                    <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/AkmUoSHkxW9txpzZ52gCcWweEkE.jpg" alt="movie.backdrop"
-                    width="100%" height="100%">
-                    
-                    <div class="overlay_info">
-                        
                     </div>
                 </div>
             </div>

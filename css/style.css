@@ -86,6 +86,7 @@ header {
     text-align: center;
     overflow: hidden;
     border-radius: 10px;
+    cursor: pointer;
 }
 .overlay_info {
     position: absolute;
@@ -111,7 +112,7 @@ header {
     border: 4px solid  #A742EB;
     border-radius: 10px;
 }
-.movie_card h3, .movie_card h4 {
+.movie_card p {
     
-    padding-top: 5%;
+    padding-top: 10px;
 }
