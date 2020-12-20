@@ -21,50 +21,69 @@
                 <img id="logo" src="https://is.gd/EE12Fe" alt="logo" width="100px" @click="clickLogo()">
 
                 <div class="searchBox">
-                    <input class="searchInput" type="text" name="searchMovie" placeholder="Search" v-model="titleSearched" v-on:keyup.13="searchMovie">
+                    <input class="searchInput" type="text" name="searchMovie" placeholder="Search" v-model="titleSearched" v-on:keyup.13="searchMovie" @keyup="suggestionMovies">
                     <button class="searchButton" href="#" @click="searchMovie">
                         <i class="material-icons">
                             search
                         </i>
                     </button>
+
+                    <div class="suggestion_card">
+                        <div class="row" v-for="movie in movies.slice(0, 3)" v-if=" suggestionSearch == 1 ">
+                            <div class="movie_card_suggestion">
+                                <img id="poster_notfound" src="https://image.freepik.com/premium-vector/404-error-page-found_41910-364.jpg"
+                                    alt="poster.notfound" width="100%" height="100%" v-if="movie.poster_path == null">
+                                
+                                <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie.poster_path" alt="movie.poster" width="100%"
+                                    height="100%">
+                            </div>
+                            <p>
+                                <strong>Titolo:</strong> {{movie.title}}
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>
 
         <main>
-            <div class="homepage_movies"  v-if="movies.length == 0 && emptyResult == 1 " >
+            <div class="homepage_movies" v-if="suggestionSearch == 1 ">
                 <h1>Film Popolari</h1>
                 <div class="top_movies">
                     <div v-for="movie in popularMovies.slice(0, 7)" class="movie_card">
-                        <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie.poster_path" alt="movie.poster" width="100%" height="100%">
+                        <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie.poster_path"
+                            alt="movie.poster" width="100%" height="100%">
                     </div>
                 </div>
-                
+
                 <h1>Film più votati</h1>
                 <div class="votated_movies">
                     <div v-for="movie in votatedMovies.slice(0, 7)" class="movie_card">
-                        <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie.poster_path" alt="movie.poster" width="100%"
-                        height="100%">
+                        <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie.poster_path"
+                            alt="movie.poster" width="100%" height="100%">
                     </div>
                 </div>
-                
+
                 <h1>Film in arrivo</h1>
                 <div class="coming_movies">
                     <div v-for="movie in comingMovies.slice(0, 7)" class="movie_card">
-                        <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie.poster_path" alt="movie.poster" width="100%"
-                        height="100%">
+                        <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie.poster_path"
+                            alt="movie.poster" width="100%" height="100%">
                     </div>
                 </div>
             </div>
 
-            <div class="movies_library" v-if="movies.length !=0">
-                <div v-for="movie in movies"  class="movie_card">
+            <div class="movies_library" v-if="movies.length !=0 && suggestionSearch == 0">
+                <div v-for="movie in movies" class="movie_card">
                     <!-- immagine quando la locandina non è disponibile -->
-                    <img id="poster_notfound" src="https://image.freepik.com/premium-vector/404-error-page-found_41910-364.jpg" alt="poster.notfound" width="100%" height="100%" v-if="movie.poster_path == null">
+                    <img id="poster_notfound"
+                        src="https://image.freepik.com/premium-vector/404-error-page-found_41910-364.jpg"
+                        alt="poster.notfound" width="100%" height="100%" v-if="movie.poster_path == null">
                     <!-- /immagine quando la locandina non è disponibile -->
 
-                    <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie.poster_path" alt="movie.poster" width="100%" height="100%">
-                
+                    <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie.poster_path" alt="movie.poster"
+                        width="100%" height="100%">
+
                     <div class="overlay_info">
                         <p>
                             <strong>Titolo:</strong> {{movie.title}}
@@ -85,7 +104,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- grafica quando l'input di ricerca non trova nessun risultato -->
             <div class="movie_notfound" v-if="emptyResult == 0">
                 <img src="https://i.ibb.co/dGyZsVv/error404.png" alt="movie.notfound" width="53%" height="45%">

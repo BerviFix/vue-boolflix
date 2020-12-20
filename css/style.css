@@ -31,7 +31,7 @@ header {
     background: #2f3640;
     border-radius: 40px;
     padding: 10px;
-
+    z-index: 1;
 }
 
 .searchBox:hover > .searchInput {
@@ -70,6 +70,35 @@ header {
     line-height: 40px;
     width: 0px;
 
+}
+
+.suggestion_card {
+    position: absolute;
+    top: 67px;
+    left: 2px;
+    width: 300px;
+    background: #2f3640;
+    border-radius: 15px;
+    
+}
+.suggestion_card .row{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 1%;
+}
+.movie_card_suggestion {
+    width: 80px;
+    height: 124px;
+    margin: 1%;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+    
+}
+.row p {
+    margin: auto;
 }
 
 .homepage_movies h1 {
@@ -145,3 +174,4 @@ header {
 .movie_notfound img {
     border-radius: 10px;
 }
+

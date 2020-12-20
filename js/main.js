@@ -9,13 +9,14 @@ var app = new Vue({
         comingMovies: [],
         titleSearched: "",
         emptyResult: 1,
-        
+        suggestionSearch: 1,
     },
     methods: {
         searchMovie: function (){
             var self = this;
             self.movies = [];
             self.emptyResult = 1;
+            self.suggestionSearch = 0;
             axios
                 .get('https://api.themoviedb.org/3/search/movie', {
                     params: {
@@ -27,10 +28,11 @@ var app = new Vue({
                 .then(function (result) {
                     self.movies = result.data.results;
                     self.emptyResult = result.data.total_results;
-
-                    
                 });
-            console.log(self.emptyResult);
+
+            if (self.titleSearched  == "") {
+                self.suggestionSearch = 1;
+            }
         },
 
         clickLogo: function () {
@@ -38,7 +40,26 @@ var app = new Vue({
             self.titleSearched = '';
             self.movies = [];
             self.emptyResult = 1;
+            self.suggestionSearch = 1;
         },
+
+        suggestionMovies: function () {
+            var self = this;
+            self.emptyResult = 1;
+            self.movies = [];
+            axios
+                .get('https://api.themoviedb.org/3/search/movie', {
+                    params: {
+                        api_key: "4ec44032bc6307e6d5108c85f5016dc7",
+                        query: self.titleSearched,
+                        language: 'it-IT',
+                    }
+                })
+                .then(function (result) {
+                    self.movies = result.data.results;
+                    self.emptyResult = result.data.total_results;
+                });
+        }
     },
 
     created: function () {
@@ -76,7 +97,6 @@ var app = new Vue({
                 self.comingMovies = result.data.results;
             });   
 
-        console.log(self.movies.length);
     },
 
 });
