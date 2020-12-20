@@ -27,6 +27,8 @@ var app = new Vue({
                 .then(function (result) {
                     self.movies = result.data.results;
                     self.emptyResult = result.data.total_results;
+
+                    
                 });
             console.log(self.emptyResult);
         },
@@ -67,13 +69,8 @@ var app = new Vue({
                 self.comingMovies = result.data.results;
             });   
 
-        
+        console.log(self.movies.length);
     },
 
-    mounted: function () {
-        var self = this;
-        console.log(self.movies);
-        console.log(self.emptyResult);
-    },
 });
 
