@@ -20,6 +20,9 @@ header {
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
 }
+#logo {
+   cursor: pointer; 
+}
 .searchBox {
     position: absolute;
     top: -2%;

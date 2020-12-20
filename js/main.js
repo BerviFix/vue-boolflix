@@ -32,6 +32,13 @@ var app = new Vue({
                 });
             console.log(self.emptyResult);
         },
+
+        clickLogo: function () {
+            var self = this;
+            self.titleSearched = '';
+            self.movies = [];
+            self.emptyResult = 1;
+        },
     },
 
     created: function () {

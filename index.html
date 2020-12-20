@@ -18,7 +18,7 @@
     <div id="root">
         <header>
             <div class="container">
-                <img src="https://is.gd/EE12Fe" alt="logo" width="100px">
+                <img id="logo" src="https://is.gd/EE12Fe" alt="logo" width="100px" @click="clickLogo()">
 
                 <div class="searchBox">
                     <input class="searchInput" type="text" name="searchMovie" placeholder="Search" v-model="titleSearched" v-on:keyup.13="searchMovie">
@@ -32,7 +32,7 @@
         </header>
 
         <main>
-            <div class="homepage_movies"  v-if="titleSearched == '' && movies.length == 0 && emptyResult == 1 " >
+            <div class="homepage_movies"  v-if="movies.length == 0 && emptyResult == 1 " >
                 <h1>Film Popolari</h1>
                 <div class="top_movies">
                     <div v-for="movie in popularMovies.slice(0, 7)" class="movie_card">
