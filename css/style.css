@@ -86,6 +86,10 @@ header {
     align-items: center;
     width: 100%;
     padding: 1%;
+    border-bottom: 1px solid gray;
+}
+.suggestion_card .row:last-child{
+    border-bottom: none;
 }
 .movie_card_suggestion {
     width: 80px;
@@ -95,7 +99,7 @@ header {
     overflow: hidden;
     border-radius: 10px;
     cursor: pointer;
-    
+
 }
 .row p {
     margin: auto;
