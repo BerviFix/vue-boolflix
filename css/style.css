@@ -5,7 +5,6 @@
 }
 
 body {
-    background-color: #202C3B;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #1A2129;
@@ -91,6 +90,9 @@ header {
     height: calc(100% - 80px);
     padding: 2%;
 }
+#poster_notfound {
+    object-fit: cover;
+}
 
 .movie_card {
     position: relative;
@@ -128,4 +130,12 @@ header {
 .movie_card p {
     
     padding-top: 10px;
+}
+
+.movie_notfound {
+    width: 1000px;
+    margin: auto;
+}
+.movie_notfound img {
+    border-radius: 10px;
 }

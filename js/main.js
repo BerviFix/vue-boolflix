@@ -8,14 +8,14 @@ var app = new Vue({
         votatedMovies: [],
         comingMovies: [],
         titleSearched: "",
-        moviesSearched: [],
+        emptyResult: 1,
         
     },
     methods: {
         searchMovie: function (){
             var self = this;
-            self.moviesSearched = [];
-            
+            self.movies = [];
+            self.emptyResult = 1;
             axios
                 .get('https://api.themoviedb.org/3/search/movie', {
                     params: {
@@ -26,14 +26,14 @@ var app = new Vue({
                 })
                 .then(function (result) {
                     self.movies = result.data.results;
+                    self.emptyResult = result.data.total_results;
                 });
-            
+            console.log(self.emptyResult);
         },
     },
 
     created: function () {
         var self = this;
-
         axios
             .get('https://api.themoviedb.org/3/movie/popular', {
                 params: {
@@ -65,8 +65,15 @@ var app = new Vue({
             })
             .then(function (result) {
                 self.comingMovies = result.data.results;
-            });    
+            });   
+
+        
     },
 
+    mounted: function () {
+        var self = this;
+        console.log(self.movies);
+        console.log(self.emptyResult);
+    },
 });
 
