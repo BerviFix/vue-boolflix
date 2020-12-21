@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.js"
-        integrity="sha512-bYkaBWaFtfPIMYt9+CX/4DWgfrjcHinjerNYxQmQx1VM76eUsPPKZa5zWV8KksVkBF/DaHSADCwil2J5Uq2ctA=="
-        crossorigin="anonymous"></script>
+    integrity="sha512-bYkaBWaFtfPIMYt9+CX/4DWgfrjcHinjerNYxQmQx1VM76eUsPPKZa5zWV8KksVkBF/DaHSADCwil2J5Uq2ctA=="
+    crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
@@ -21,7 +21,7 @@
                 <img id="logo" src="https://is.gd/EE12Fe" alt="logo" width="100px" @click="clickLogo()">
 
                 <div class="searchBox">
-                    <input class="searchInput" type="text" name="searchMovie" placeholder="Search" v-model="titleSearched" v-on:keyup.13="searchMovie" @keyup="suggestionMovies">
+                    <input class="searchInput" type="text" name="searchMovie" placeholder="Search" v-model="titleSearched" v-on:keyup.13="searchMovie" >
                     <button class="searchButton" href="#" @click="searchMovie">
                         <i class="material-icons">
                             search
@@ -74,14 +74,14 @@
             </div>
 
             <div class="movies_library" v-if="movies.length !=0 && suggestionSearch == 0">
-                <div v-for="movie in movies" class="movie_card">
+                <div v-for="(movie, index) in movies" class="movie_card">
                     <!-- immagine quando la locandina non è disponibile -->
                     <img id="poster_notfound"
                         src="https://image.freepik.com/premium-vector/404-error-page-found_41910-364.jpg"
-                        alt="poster.notfound" width="100%" height="100%" v-if="movie.poster_path == null">
+                        alt="imgenotfound" width="100%" height="100%" v-if="movie.poster_path == null">
                     <!-- /immagine quando la locandina non è disponibile -->
 
-                    <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie.poster_path" alt="movie.poster"
+                    <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie.poster_path" alt="poster"
                         width="100%" height="100%">
 
                     <div class="overlay_info">
@@ -93,9 +93,9 @@
                         </p>
                         <p>
                             <strong>Voto:</strong>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+                            <span> {{ movie.fullStar }} </span>
+                            <i class="fas fa-star" v-for="i in movie.fullStar"></i>
+                            <i class="far fa-star" v-for="i in (5 - movie.fullStar)"></i>
                         </p>
                         <p>
                             <strong>Overview:</strong>

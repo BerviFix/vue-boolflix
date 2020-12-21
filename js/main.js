@@ -28,19 +28,31 @@ var app = new Vue({
                 .then(function (result) {
                     self.movies = result.data.results;
                     self.emptyResult = result.data.total_results;
+
+                    // self.movies.forEach(
+                    //     (element) => {
+                    //         const rawVote = (element.vote_average) /2;
+                    //         element.fullStar = Math.ceil(rawVote);
+                    //     }
+                    // );
+
                 });
+            
 
             if (self.titleSearched  == "") {
                 self.suggestionSearch = 1;
             }
         },
-
         clickLogo: function () {
             var self = this;
             self.titleSearched = '';
             self.movies = [];
             self.emptyResult = 1;
             self.suggestionSearch = 1;
+        },
+
+        getVote: function (number) {
+            return Math.ceil(number / 2);
         },
 
         suggestionMovies: function () {
