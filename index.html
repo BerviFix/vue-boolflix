@@ -75,7 +75,7 @@
             </div>
             
             <!-- Sezione film -->
-            <div class="library_title">
+            <div class="library_title" v-if="movies.length !=0 && suggestionSearch == 0">
                 <h1>Film</h1>
             </div>
             
@@ -116,7 +116,7 @@
             <!-- /Sezione film -->
 
             <!-- Sezione serie tv -->
-            <div class="library_title">
+            <div class="library_title" v-if="tvShows.length !=0 && suggestionSearch == 0">
                 <h1>Serie TV</h1>
             </div>
 
