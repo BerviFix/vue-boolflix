@@ -20,6 +20,7 @@ var app = new Vue({
             self.emptyResult = 1;
             self.suggestionSearch = 0;
             axios
+                // chiamata ajax film
                 .get('https://api.themoviedb.org/3/search/movie', {
                     params: {
                         api_key: "4ec44032bc6307e6d5108c85f5016dc7",
@@ -39,8 +40,28 @@ var app = new Vue({
                     );
 
                 });
+                // chiamata ajax film\
 
             axios
+                // chiamata ajax cast film
+                // .get('https://api.themoviedb.org/3/movie/this.movies.id/credits', {
+                //     params: {
+                //         api_key: "4ec44032bc6307e6d5108c85f5016dc7",
+                //         language: 'it-IT',
+                //     }
+                // })
+                // .then(function (result) {
+                //     self.movies.forEach(
+                //         (element) => {
+                //             element.cast = result.data.cast;
+                //         }
+                //     );
+
+                // });
+                // chiamata ajax  cast film\
+
+            axios
+                // chiamata ajax serie tv
                 .get('https://api.themoviedb.org/3/search/tv', {
                     params: {
                         api_key: "4ec44032bc6307e6d5108c85f5016dc7",
@@ -58,7 +79,10 @@ var app = new Vue({
                             element.fullStar = Math.ceil(rawVote);
                         }
                     );
-                });    
+                });
+                // chiamata ajax serie tv\
+
+
 
 
             if (self.titleSearched  == "") {
@@ -83,6 +107,7 @@ var app = new Vue({
             self.movies = [];
             self.tvShows = [];
             axios
+                // chiamata ajax film
                 .get('https://api.themoviedb.org/3/search/movie', {
                     params: {
                         api_key: "4ec44032bc6307e6d5108c85f5016dc7",
@@ -101,8 +126,10 @@ var app = new Vue({
                         }
                     );
                 });
+                // chiamata ajax film\
 
             axios
+                // chiamata ajax serie tv
                 .get('https://api.themoviedb.org/3/search/tv', {
                     params: {
                         api_key: "4ec44032bc6307e6d5108c85f5016dc7",
