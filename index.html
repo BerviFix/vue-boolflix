@@ -99,11 +99,7 @@
                         </p>
                         <p>
                             <strong>Nazionalità:</strong>
-                            <i class="flag flag-IT" v-if="movie.original_language == 'it' "></i>
-                            <i class="flag flag-US" v-if="movie.original_language == 'en' "></i>
-                            <i class="flag flag-DE" v-if="movie.original_language == 'de' "></i>
-                            <i class="flag flag-FR" v-if="movie.original_language == 'fr' "></i>
-                            <i class="flag flag-ES" v-if="movie.original_language == 'es' "></i>
+                            <i :class="'flag flag-' + movie.original_language "></i>
                         </p>
                         <p>
                             <strong>Overview:</strong>
