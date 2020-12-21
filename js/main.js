@@ -29,15 +29,16 @@ var app = new Vue({
                     self.movies = result.data.results;
                     self.emptyResult = result.data.total_results;
 
-                    // self.movies.forEach(
-                    //     (element) => {
-                    //         const rawVote = (element.vote_average) /2;
-                    //         element.fullStar = Math.ceil(rawVote);
-                    //     }
-                    // );
+                    self.movies.forEach(
+                        (element) => {
+                            const rawVote = (element.vote_average) /2;
+                            element.fullStar = Math.ceil(rawVote);
+                        }
+                    );
 
                 });
-            
+                
+
 
             if (self.titleSearched  == "") {
                 self.suggestionSearch = 1;
@@ -51,9 +52,9 @@ var app = new Vue({
             self.suggestionSearch = 1;
         },
 
-        getVote: function (number) {
-            return Math.ceil(number / 2);
-        },
+        // getVote: function (number) {
+        //     return Math.ceil(number / 2);
+        // },
 
         suggestionMovies: function () {
             var self = this;
@@ -70,6 +71,13 @@ var app = new Vue({
                 .then(function (result) {
                     self.movies = result.data.results;
                     self.emptyResult = result.data.total_results;
+
+                    self.movies.forEach(
+                        (element) => {
+                            const rawVote = (element.vote_average) / 2;
+                            element.fullStar = Math.ceil(rawVote);
+                        }
+                    );
                 });
         }
     },
