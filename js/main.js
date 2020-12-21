@@ -44,20 +44,20 @@ var app = new Vue({
 
             axios
                 // chiamata ajax cast film
-                // .get('https://api.themoviedb.org/3/movie/this.movies.id/credits', {
-                //     params: {
-                //         api_key: "4ec44032bc6307e6d5108c85f5016dc7",
-                //         language: 'it-IT',
-                //     }
-                // })
-                // .then(function (result) {
-                //     self.movies.forEach(
-                //         (element) => {
-                //             element.cast = result.data.cast;
-                //         }
-                //     );
+                .get('https://api.themoviedb.org/3/movie/this.movies.id/credits', {
+                    params: {
+                        api_key: "4ec44032bc6307e6d5108c85f5016dc7",
+                        language: 'it-IT',
+                    }
+                })
+                .then(function (result) {
+                    self.movies.forEach(
+                        (element) => {
+                            element.cast = result.data.cast;
+                        }
+                    );
 
-                // });
+                });
                 // chiamata ajax  cast film\
 
             axios
@@ -93,6 +93,7 @@ var app = new Vue({
             var self = this;
             self.titleSearched = '';
             self.movies = [];
+            self.tvShows = [];
             self.emptyResult = 1;
             self.suggestionSearch = 1;
         },

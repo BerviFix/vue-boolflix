@@ -29,7 +29,7 @@
                     </button>
 
                     <div class="suggestion_card">
-                        <div class="row" v-for="movie in movies.slice(0, 3)" v-if=" suggestionSearch == 1 ">
+                        <div class="row" v-for="movie in movies.slice(0, 2)" v-if=" suggestionSearch == 1 ">
                             <div class="movie_card_suggestion">
                                 <img id="poster_notfound"
                                     src="https://image.freepik.com/premium-vector/404-error-page-found_41910-364.jpg"
@@ -40,6 +40,19 @@
                             </div>
                             <p>
                                 <strong>Titolo:</strong> {{movie.title}}
+                            </p>
+                        </div>
+
+                        <div class="row" v-for="show in tvShows.slice(0, 2)" v-if=" suggestionSearch == 1 ">
+                            <div class="movie_card_suggestion">
+                                <img id="poster_notfound" src="https://image.freepik.com/premium-vector/404-error-page-found_41910-364.jpg"
+                                    alt="poster.notfound" width="100%" height="100%" v-if="show.poster_path == null">
+                        
+                                <img :src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + show.poster_path" alt="show.poster"
+                                    width="100%" height="100%">
+                            </div>
+                            <p>
+                                <strong>Titolo:</strong> {{show.name}}
                             </p>
                         </div>
                     </div>
@@ -132,7 +145,7 @@
             
                     <div class="overlay_info">
                         <p>
-                            <strong>Titolo:</strong> {{show.title}}
+                            <strong>Titolo:</strong> {{show.name}}
                         </p>
                         <p>
                             <strong>Titolo originale:</strong> {{show.original_title}}
