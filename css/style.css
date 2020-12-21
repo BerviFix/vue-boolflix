@@ -118,13 +118,18 @@ header {
     height: 400px;
 }
 
-.movies_library {
+.library {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     width: 100%;
     height: calc(100% - 80px);
     padding: 2%;
+}
+.library_title {
+    width: 90%;
+    margin: auto;
+    padding-top: 2%;
 }
 #poster_notfound {
     object-fit: cover;

@@ -4,6 +4,7 @@ var app = new Vue({
     el: '#root',
     data: {
         movies: [],
+        tvShows: [],
         popularMovies: [],
         votatedMovies: [],
         comingMovies: [],
@@ -12,9 +13,10 @@ var app = new Vue({
         suggestionSearch: 1,
     },
     methods: {
-        searchMovie: function (){
+        searchContent: function (){
             var self = this;
             self.movies = [];
+            self.tvShows = [];
             self.emptyResult = 1;
             self.suggestionSearch = 0;
             axios
@@ -37,7 +39,26 @@ var app = new Vue({
                     );
 
                 });
-                
+
+            axios
+                .get('https://api.themoviedb.org/3/search/tv', {
+                    params: {
+                        api_key: "4ec44032bc6307e6d5108c85f5016dc7",
+                        query: self.titleSearched,
+                        language: 'it-IT',
+                    }
+                })
+                .then(function (result) {
+                    self.tvShows = result.data.results;
+                    self.emptyResult = result.data.total_results;
+
+                    self.tvShows.forEach(
+                        (element) => {
+                            const rawVote = (element.vote_average) / 2;
+                            element.fullStar = Math.ceil(rawVote);
+                        }
+                    );
+                });    
 
 
             if (self.titleSearched  == "") {
@@ -60,6 +81,7 @@ var app = new Vue({
             var self = this;
             self.emptyResult = 1;
             self.movies = [];
+            self.tvShows = [];
             axios
                 .get('https://api.themoviedb.org/3/search/movie', {
                     params: {
@@ -73,6 +95,26 @@ var app = new Vue({
                     self.emptyResult = result.data.total_results;
 
                     self.movies.forEach(
+                        (element) => {
+                            const rawVote = (element.vote_average) / 2;
+                            element.fullStar = Math.ceil(rawVote);
+                        }
+                    );
+                });
+
+            axios
+                .get('https://api.themoviedb.org/3/search/tv', {
+                    params: {
+                        api_key: "4ec44032bc6307e6d5108c85f5016dc7",
+                        query: self.titleSearched,
+                        language: 'it-IT',
+                    }
+                })
+                .then(function (result) {
+                    self.tvShows = result.data.results;
+                    self.emptyResult = result.data.total_results;
+
+                    self.tvShows.forEach(
                         (element) => {
                             const rawVote = (element.vote_average) / 2;
                             element.fullStar = Math.ceil(rawVote);
