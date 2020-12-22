@@ -120,6 +120,10 @@
                             <i :class="'flag flag-' + movie.original_language "></i>
                         </p>
                         <p>
+                            <strong>Attori:</strong>
+                            <i>{{ movie.cast }}</i>
+                        </p>
+                        <p>
                             <strong>Overview:</strong>
                             {{movie.overview}}
                         </p>
@@ -148,9 +152,6 @@
                             <strong>Titolo:</strong> {{show.name}}
                         </p>
                         <p>
-                            <strong>Titolo originale:</strong> {{show.original_title}}
-                        </p>
-                        <p>
                             <strong>Voto:</strong>
                             <i class="fas fa-star" v-for="i in show.fullStar"></i>
                             <i class="far fa-star" v-for="i in (5 - show.fullStar)"></i>
@@ -159,6 +160,7 @@
                             <strong>Nazionalità:</strong>
                             <i :class="'flag flag-' + show.original_language "></i>
                         </p>
+
                         <p>
                             <strong>Overview:</strong>
                             {{show.overview}}

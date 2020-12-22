@@ -42,23 +42,23 @@ var app = new Vue({
                 });
                 // chiamata ajax film\
 
-            axios
-                // chiamata ajax cast film
-                .get('https://api.themoviedb.org/3/movie/this.movies.id/credits', {
-                    params: {
-                        api_key: "4ec44032bc6307e6d5108c85f5016dc7",
-                        language: 'it-IT',
-                    }
-                })
-                .then(function (result) {
-                    self.movies.forEach(
-                        (element) => {
-                            element.cast = result.data.cast;
-                        }
-                    );
+            // axios
+            //     // chiamata ajax cast film
+            //     .get('https://api.themoviedb.org/3/movie/${element.id}/credits', {
+            //         params: {
+            //             api_key: "4ec44032bc6307e6d5108c85f5016dc7",
+            //             language: 'it-IT',
+            //         }
+            //     })
+            //     .then(function (result) {
+            //         self.movies.forEach(
+            //             (element) => {
+            //                 element.cast = result.data.cast.slice(0, 5);
+            //             }
+            //         );
 
-                });
-                // chiamata ajax  cast film\
+            //     });
+            //     // chiamata ajax  cast film\
 
             axios
                 // chiamata ajax serie tv
@@ -128,6 +128,24 @@ var app = new Vue({
                     );
                 });
                 // chiamata ajax film\
+
+            axios
+                // chiamata ajax cast film
+                .get('https://api.themoviedb.org/3/movie/${movies.id}/credits', {
+                    params: {
+                        api_key: "4ec44032bc6307e6d5108c85f5016dc7",
+                        language: 'it-IT',
+                    }
+                })
+                .then(function (result) {
+                    self.movies.forEach(
+                        (element) => {
+                            element.cast = result.data.cast.slice(0, 5);
+                        }
+                    );
+                console.log(element.cast);
+                });
+                // chiamata ajax  cast film\
 
             axios
                 // chiamata ajax serie tv
