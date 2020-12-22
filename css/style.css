@@ -101,6 +101,10 @@ header {
     cursor: pointer;
 
 }
+.movie_card_suggestion {
+    flex-shrink: 0;
+
+}
 .row p {
     margin: auto;
 }
