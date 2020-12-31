@@ -31,34 +31,43 @@ var app = new Vue({
                 .then(function (result) {
                     self.movies = result.data.results;
                     self.emptyResult = result.data.total_results;
+                    const initialUrl = 'https://api.themoviedb.org/3/movie/';
+                    const finalUrl = '/credits';
 
                     self.movies.forEach(
                         (element) => {
                             const rawVote = (element.vote_average) /2;
                             element.fullStar = Math.ceil(rawVote);
-                        }
-                    );
 
+                            axios
+                                // chiamata ajax cast film
+                                .get(initialUrl + element.id + finalUrl, {
+                                    params: {
+                                        api_key: "4ec44032bc6307e6d5108c85f5016dc7",
+                                        language: 'it-IT',
+                                    }
+                                })
+                                .then(function (result) {
+                                    
+                                    element.actors = [];
+                                    element.cast = result.data.cast.slice(0, 5);
+                                    
+                                    for (let i = 0; i < element.cast.length; i++) {
+                                        const actor = element.cast[i];
+                                        element.actors.push(actor.name);
+                                    }
+
+                                });
+                            // chiamata ajax  cast film\
+                        },
+
+                    );
+                    console.log(self.movies);
                 });
                 // chiamata ajax film\
+            
 
-            // axios
-            //     // chiamata ajax cast film
-            //     .get('https://api.themoviedb.org/3/movie/${element.id}/credits', {
-            //         params: {
-            //             api_key: "4ec44032bc6307e6d5108c85f5016dc7",
-            //             language: 'it-IT',
-            //         }
-            //     })
-            //     .then(function (result) {
-            //         self.movies.forEach(
-            //             (element) => {
-            //                 element.cast = result.data.cast.slice(0, 5);
-            //             }
-            //         );
 
-            //     });
-            //     // chiamata ajax  cast film\
 
             axios
                 // chiamata ajax serie tv
@@ -79,16 +88,18 @@ var app = new Vue({
                             element.fullStar = Math.ceil(rawVote);
                         }
                     );
+                    
                 });
                 // chiamata ajax serie tv\
-
-
-
-
+            
+            
             if (self.titleSearched  == "") {
                 self.suggestionSearch = 1;
             }
+
+
         },
+
         clickLogo: function () {
             var self = this;
             self.titleSearched = '';
@@ -107,6 +118,8 @@ var app = new Vue({
             self.emptyResult = 1;
             self.movies = [];
             self.tvShows = [];
+            const initialUrl = 'https://api.themoviedb.org/3/movie/';
+            const finalUrl = '/credits';
             axios
                 // chiamata ajax film
                 .get('https://api.themoviedb.org/3/search/movie', {
@@ -124,28 +137,32 @@ var app = new Vue({
                         (element) => {
                             const rawVote = (element.vote_average) / 2;
                             element.fullStar = Math.ceil(rawVote);
+                            
+                            axios
+                                // chiamata ajax cast film
+                                .get(initialUrl + element.id + finalUrl, {
+                                    params: {
+                                        api_key: "4ec44032bc6307e6d5108c85f5016dc7",
+                                        language: 'it-IT',
+                                    }
+                                })
+                                .then(function (result) {
+                                   
+                                    element.actors = [];
+                                    element.cast = result.data.cast.slice(0, 5);
+
+                                    for (let i = 0; i < element.cast.length; i++) {
+                                        const actor = element.cast[i];
+                                        element.actors.push(actor.name);
+                                    }
+                                    self.$forceUpdate();
+                                });
+                            // chiamata ajax cast film\
                         }
                     );
+                    console.log(self.movies);
                 });
                 // chiamata ajax film\
-
-            axios
-                // chiamata ajax cast film
-                .get('https://api.themoviedb.org/3/movie/${movies.id}/credits', {
-                    params: {
-                        api_key: "4ec44032bc6307e6d5108c85f5016dc7",
-                        language: 'it-IT',
-                    }
-                })
-                .then(function (result) {
-                    self.movies.forEach(
-                        (element) => {
-                            element.cast = result.data.cast.slice(0, 5);
-                        }
-                    );
-                console.log(element.cast);
-                });
-                // chiamata ajax  cast film\
 
             axios
                 // chiamata ajax serie tv

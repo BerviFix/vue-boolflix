@@ -121,8 +121,9 @@
                         </p>
                         <p>
                             <strong>Attori:</strong>
-                            <i>{{ movie.cast }}</i>
+                            <i v-for="actor in movie.actors">{{ actor }} <br></i>
                         </p>
+                        
                         <p>
                             <strong>Overview:</strong>
                             {{movie.overview}}
