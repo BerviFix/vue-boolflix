@@ -24,6 +24,7 @@ var app = new Vue({
             self.emptyResult = 1;
             self.suggestionSearch = 0;
             self.moviesGenre = "";
+            self.showsGenre = "";
             axios
                 // chiamata ajax film
                 .get('https://api.themoviedb.org/3/search/movie', {
@@ -121,6 +122,7 @@ var app = new Vue({
             self.movies = [];
             self.tvShows = [];
             self.moviesGenre = "";
+            self.showsGenre = "";
             const initialUrl = 'https://api.themoviedb.org/3/movie/';
             const finalUrl = '/credits';
             axios
