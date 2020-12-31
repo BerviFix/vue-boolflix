@@ -90,10 +90,14 @@
             <!-- Sezione film -->
             <div class="library_title" v-if="movies.length !=0 && suggestionSearch == 0">
                 <h1>Film</h1>
+                <select name="movies_genre" id="movies_genre" v-model="moviesGenre" @click="moviesGenreCheck">
+                    <option value="">Tutti i generi</option>
+                    <option v-for="(genre, index) in moviesGenreList" :value="genre.id">{{genre.name}}</option>
+                </select>
             </div>
             
             <div class="library" v-if="movies.length !=0 && suggestionSearch == 0">
-                <div v-for="(movie, index) in movies" class="movie_card">
+                <div v-for="(movie, index) in movies" v-if="movie.checkGenreMovies == true" class="movie_card">
                     <!-- immagine quando la locandina non è disponibile -->
                     <img id="poster_notfound"
                         src="https://image.freepik.com/premium-vector/404-error-page-found_41910-364.jpg"
@@ -136,10 +140,14 @@
             <!-- Sezione serie tv -->
             <div class="library_title" v-if="tvShows.length !=0 && suggestionSearch == 0">
                 <h1>Serie TV</h1>
+                <select name="movies_genre" id="movies_genre" v-model="showsGenre" @click="showsGenreCheck">
+                    <option value="">Tutti i generi</option>
+                    <option v-for="(genre, index) in showsGenreList" :value="genre.id">{{genre.name}}</option>
+                </select>
             </div>
 
             <div class="library" v-if="tvShows.length !=0 && suggestionSearch == 0">
-                <div v-for="(show, index) in tvShows" class="movie_card">
+                <div v-for="(show, index) in tvShows" v-if="show.checkGenretvShows == true" class="movie_card">
                     <!-- immagine quando la locandina non è disponibile -->
                     <img id="poster_notfound" src="https://image.freepik.com/premium-vector/404-error-page-found_41910-364.jpg"
                         alt="imgenotfound" width="100%" height="100%" v-if="show.poster_path == null">

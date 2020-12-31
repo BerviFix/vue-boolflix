@@ -131,6 +131,8 @@ header {
     padding: 2%;
 }
 .library_title {
+    display: flex;
+    justify-content: space-between;
     width: 90%;
     margin: auto;
     padding-top: 2%;

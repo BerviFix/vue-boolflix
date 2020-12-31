@@ -8,9 +8,13 @@ var app = new Vue({
         popularMovies: [],
         votatedMovies: [],
         comingMovies: [],
+        moviesGenreList: [],
+        showsGenreList: [],
         titleSearched: "",
         emptyResult: 1,
         suggestionSearch: 1,
+        moviesGenre : "",
+        showsGenre: "",
     },
     methods: {
         searchContent: function (){
@@ -19,6 +23,7 @@ var app = new Vue({
             self.tvShows = [];
             self.emptyResult = 1;
             self.suggestionSearch = 0;
+            self.moviesGenre = "";
             axios
                 // chiamata ajax film
                 .get('https://api.themoviedb.org/3/search/movie', {
@@ -36,6 +41,7 @@ var app = new Vue({
 
                     self.movies.forEach(
                         (element) => {
+                            element.checkGenreMovies = true;
                             const rawVote = (element.vote_average) /2;
                             element.fullStar = Math.ceil(rawVote);
 
@@ -62,13 +68,10 @@ var app = new Vue({
                         },
 
                     );
-                    console.log(self.movies);
                 });
                 // chiamata ajax film\
+
             
-
-
-
             axios
                 // chiamata ajax serie tv
                 .get('https://api.themoviedb.org/3/search/tv', {
@@ -84,6 +87,7 @@ var app = new Vue({
 
                     self.tvShows.forEach(
                         (element) => {
+                            element.checkGenretvShows = true;
                             const rawVote = (element.vote_average) / 2;
                             element.fullStar = Math.ceil(rawVote);
                         }
@@ -96,8 +100,6 @@ var app = new Vue({
             if (self.titleSearched  == "") {
                 self.suggestionSearch = 1;
             }
-
-
         },
 
         clickLogo: function () {
@@ -118,6 +120,7 @@ var app = new Vue({
             self.emptyResult = 1;
             self.movies = [];
             self.tvShows = [];
+            self.moviesGenre = "";
             const initialUrl = 'https://api.themoviedb.org/3/movie/';
             const finalUrl = '/credits';
             axios
@@ -135,6 +138,7 @@ var app = new Vue({
 
                     self.movies.forEach(
                         (element) => {
+                            element.checkGenreMovies = true;
                             const rawVote = (element.vote_average) / 2;
                             element.fullStar = Math.ceil(rawVote);
                             
@@ -160,7 +164,6 @@ var app = new Vue({
                             // chiamata ajax cast film\
                         }
                     );
-                    console.log(self.movies);
                 });
                 // chiamata ajax film\
 
@@ -179,11 +182,42 @@ var app = new Vue({
 
                     self.tvShows.forEach(
                         (element) => {
+                            element.checkGenretvShows = true;
                             const rawVote = (element.vote_average) / 2;
                             element.fullStar = Math.ceil(rawVote);
                         }
                     );
                 });
+        },
+
+        moviesGenreCheck: function () {
+            var self = this;
+            if (self.moviesGenre == "") {
+                for (let i = 0; i < self.movies.length; i++) {
+                    self.movies[i].checkGenreMovies = true;
+                }
+            }
+
+            if (self.moviesGenre != "") {
+                for (let i = 0; i < self.movies.length; i++) {
+                    self.movies[i].checkGenreMovies = self.movies[i].genre_ids.includes(self.moviesGenre);
+                }
+            }
+        },
+
+        showsGenreCheck: function () {
+            var self = this;
+            if (self.showsGenre == "") {
+                for (let i = 0; i < self.tvShows.length; i++) {
+                    self.tvShows[i].checkGenretvShows = true;
+                }
+            }
+
+            if (self.showsGenre != "") {
+                for (let i = 0; i < self.tvShows.length; i++) {
+                    self.tvShows[i].checkGenretvShows = self.tvShows[i].genre_ids.includes(self.showsGenre);
+                }
+            }
         }
     },
 
@@ -220,7 +254,37 @@ var app = new Vue({
             })
             .then(function (result) {
                 self.comingMovies = result.data.results;
-            });   
+            });
+
+        axios
+            // chiamata generi film
+            .get('https://api.themoviedb.org/3/genre/movie/list', {
+                params: {
+                    api_key: "4ec44032bc6307e6d5108c85f5016dc7",
+                    language: 'it-IT',
+                }
+            })
+            .then(function (result) {
+                self.moviesGenreList = result.data.genres;
+            });
+
+        
+            // chiamata generi film\
+        
+        axios
+            // chiamata generi serie tv
+            .get('https://api.themoviedb.org/3/genre/tv/list', {
+                params: {
+                    api_key: "4ec44032bc6307e6d5108c85f5016dc7",
+                    language: 'it-IT',
+                }
+            })
+            .then(function (result) {
+                self.showsGenreList = result.data.genres;
+            });
+
+
+            // chiamata generi serie tv\
 
     },
 
