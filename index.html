@@ -28,7 +28,7 @@
                         </i>
                     </button>
 
-                    <div class="suggestion_card">
+                    <div class="suggestion_card" @click="searchContent">
                         <div class="row" v-for="movie in movies.slice(0, 2)" v-if=" suggestionSearch == 1 ">
                             <div class="movie_card_suggestion">
                                 <img id="poster_notfound"
